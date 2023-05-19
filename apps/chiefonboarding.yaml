@@ -7,7 +7,6 @@ services:
       SECRET_KEY: $$cap_secret_key
       DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@$$cap_postgres_host/$$cap_postgres_db
       ALLOWED_HOSTS: $$cap_allowed_hosts
-      HTTP_INSECURE: "TRUE"
       AWS_S3_ENDPOINT_URL: $$cap_aws_s3_endpoint_url
       AWS_ACCESS_KEY_ID: $$cap_aws_access_key_id
       AWS_SECRET_ACCESS_KEY: $$cap_aws_secret_access_key
@@ -79,16 +78,12 @@ caproverOneClickApp:
       defaultValue: ' '
       description: Enter the AWS region, leave blank for the likes of Cloudflare R2.
       validRegex: /.{1,}/
-    - id: $$cap_http_insecure
-      label: HTTP Insecure
-      defaultValue: 'TRUE'
-      description: Set to 'TRUE' to enable insecure HTTP.
-      validRegex: '/^(TRUE|FALSE)$/'
+
 
   instructions:
     start: |-
       The Chief Onboarding app provides a seamless onboarding experience.
-      Please enter the required information and follow the instructions to complete the setup.
+      Please enter the required information and follow the instructions to complete the setup, you HAVE TO ENABLE HTTPS for the app to work.
     end: |-
       The Chief Onboarding app has been successfully deployed!
       Please wait a minute to populate the database. Please enable HTTPS for this to work properly.
