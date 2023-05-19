@@ -88,7 +88,7 @@ caproverOneClickApp:
             Please wait a minute to populate the database. Please enable HTTPS for this to work properly.
             Your service is available at http://$$cap_appname.$$cap_root_domain
 
-displayName: Chief Onboarding
-isOfficial: false
-description: A seamless onboarding experience for your employees.
-documentation: Visit https://github.com/chiefonboarding/chiefonboarding for more details.
+    displayName: Chief Onboarding
+    isOfficial: false
+    description: A seamless onboarding experience for your employees.
+    documentation: Visit https://github.com/chiefonboarding/chiefonboarding for more details.
