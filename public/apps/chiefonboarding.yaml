@@ -1,0 +1,100 @@
+captainVersion: 4
+services:
+  $$cap_appname:
+    image: chiefonboarding/chiefonboarding:$$cap_chiefonboarding_version
+    restart: always
+    environment:
+      SECRET_KEY: $$cap_secret_key
+      DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@$$cap_postgres_host/$$cap_postgres_db
+      ALLOWED_HOSTS: $$cap_allowed_hosts
+      HTTP_INSECURE: "TRUE"
+      AWS_S3_ENDPOINT_URL: $$cap_aws_s3_endpoint_url
+      AWS_ACCESS_KEY_ID: $$cap_aws_access_key_id
+      AWS_SECRET_ACCESS_KEY: $$cap_aws_secret_access_key
+      AWS_STORAGE_BUCKET_NAME: $$cap_aws_storage_bucket_name
+      AWS_REGION: $$cap_aws_region
+      VIRTUAL_HOST: $$cap_appname.$$cap_root_domain
+    caproverExtra:
+      containerHttpPort: '8000'
+
+caproverOneClickApp:
+  variables:
+    - id: $$cap_chiefonboarding_version
+      label: ChiefOnboarding Version
+      defaultValue: 'latest'
+      description: Check out their Docker page for the valid tags https://hub.docker.com/r/chiefonboarding/chiefonboarding/tags
+      validRegex: /^([^\s^\/])+$/
+    - id: $$cap_postgres_user
+      label: PostgreSQL User
+      defaultValue: 'postgres'
+      description: Enter the username for the PostgreSQL connection.
+      validRegex: /.{1,}/
+    - id: $$cap_postgres_password
+      label: PostgreSQL Password
+      defaultValue: 'password'
+      description: Enter the password for the PostgreSQL connection.
+      validRegex: /.{1,}/
+    - id: $$cap_postgres_host
+      label: PostgreSQL Host
+      defaultValue: 'db'
+      description: Enter the host for the PostgreSQL connection.
+      validRegex: /.{1,}/
+    - id: $$cap_postgres_db
+      label: PostgreSQL Database
+      defaultValue: 'chiefonboarding'
+      description: Enter the name of the PostgreSQL database.
+      validRegex: /.{1,}/
+    - id: $$cap_secret_key
+      label: Secret Key
+      defaultValue: 'somethingsupersecret'
+      description: Enter the secret key for the app.
+      validRegex: /.{1,}/
+    - id: $$cap_allowed_hosts
+      label: Allowed Hosts
+      defaultValue: '*'
+      description: Enter the allowed hosts for the app, leave the default value if you are configuring this to more than one domain or define those here in comma delimited fashion.
+      validRegex: /.{1,}/
+    - id: $$cap_aws_s3_endpoint_url
+      label: AWS S3 Endpoint URL
+      defaultValue: ' '
+      description: Enter the AWS S3 endpoint URL, leave blank for no storage configuration.
+      validRegex: /.{1,}/
+    - id: $$cap_aws_access_key_id
+      label: AWS Access Key ID
+      defaultValue: ' '
+      description: Enter the AWS access key ID, leave blank for no storage configuration.
+      validRegex: /.{1,}/
+    - id: $$cap_aws_secret_access_key
+      label: AWS Secret Access Key
+      defaultValue: ' '
+      description: Enter the AWS secret access key, leave blank for no storage configuration.
+      validRegex: /.{1,}/
+    - id: $$cap_aws_storage_bucket_name
+      label: AWS Storage Bucket Name
+      defaultValue: ' '
+      description: Enter the AWS storage bucket name, leave blank for no storage configuration.
+      validRegex: /.{1,}/
+    - id: $$cap_aws_region
+      label: AWS Region
+      defaultValue: ' '
+      description: Enter the AWS region, leave blank for the likes of Cloudflare R2.
+      validRegex: /.{1,}/
+    - id: $$cap_http_insecure
+      label: HTTP Insecure
+      defaultValue: 'TRUE'
+      description: Set to 'TRUE' to enable insecure HTTP.
+      validRegex: '/^(TRUE|FALSE)$/'
+
+  instructions:
+    start: |-
+      The Chief Onboarding app provides a seamless onboarding experience.
+      Please enter the required information and follow the instructions to complete the setup.
+    end: |-
+      The Chief Onboarding app has been successfully deployed!
+      Please wait a minute to populate the database. Please enable HTTPS for this to work properly.
+      Your service is available at http://$$cap_appname.$$cap_root_domain
+
+displayName: Chief Onboarding
+isOfficial: false
+description: A seamless onboarding experience.
+documentation: Visit https://github.com/chiefonboarding/chiefonboarding for more details.
