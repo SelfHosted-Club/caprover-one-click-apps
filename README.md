@@ -1,8 +1,11 @@
-## Repo for CapRover One Click Apps by SelfHosted.club
 
-If you'd like this to work under your Caprover setup, go to Apps, scroll all the way down and add https://caprover.selfhosted.club under "3rd party repositories:"; click "Connect new repository".
+### Third party One Click Apps
 
-You're done.
+In order to add a third party repository:
+-   Login to your CapRover dashboard
+-   Go to **apps** and click on **One-Click Apps/Databases** and scrolldown to the bottom
+-   Under **3rd party repositories:** copy  the URL, (for example: `[https://caprover.selfhosted.club]`) and paste it in to the text box
+-   Click the **_Connect New Repository_** button
 
 ---------
 
@@ -18,13 +21,7 @@ To create your own repository:
 - Run `npm run build`
 - Now you can host the static content placed in `./dist` directory anywhere you want, the official repo uses github pages to publish the content. Make sure to update [CNAME](https://github.com/caprover/one-click-apps/blob/master/public/CNAME) to your own URL if you decide to do so.
 
-### Third party One Click Apps
 
-In order to add a third party repository:
--   Login to your CapRover dashboard
--   Go to **apps** and click on **One-Click Apps/Databases** and scrolldown to the bottom
--   Under **3rd party repositories:** copy  the URL, (for example: `https://Awes0meHub.github.io/caprover-one-click-apps`) and paste it in to the text box
--   Click the **_Connect New Repository_** button
 
 #### 3rd party repositorie
 -   Awes0meHub: [Github](https://github.com/Awes0meHub/caprover-one-click-apps) repository: `https://Awes0meHub.github.io/caprover-one-click-apps`
