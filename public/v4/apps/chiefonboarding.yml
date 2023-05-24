@@ -4,7 +4,7 @@ services:
         image: chiefonboarding/chiefonboarding:$$cap_chiefonboarding_version
         restart: always
         environment:
-            SECRET_KEY: $$cap_secret_key
+            SECRET_KEY: $$cap_gen_random_hex(64)
             DATABASE_URL: postgresql://$$cap_postgres_user:$$cap_postgres_password@$$cap_postgres_host/$$cap_postgres_db
             ALLOWED_HOSTS: $$cap_allowed_hosts
             AWS_S3_ENDPOINT_URL: $$cap_aws_s3_endpoint_url
@@ -43,11 +43,6 @@ caproverOneClickApp:
           defaultValue: 'chiefonboarding'
           description: Enter the name of the PostgreSQL database.
           validRegex: /.{1,}/
-        - id: $$cap_secret_key
-          label: Secret Key
-          defaultValue: 'somethingsupersecret'
-          description: Enter the secret key for the app.
-          validRegex: /.{1,}/
         - id: $$cap_allowed_hosts
           label: Allowed Hosts
           defaultValue: '*'
@@ -55,29 +50,29 @@ caproverOneClickApp:
           validRegex: /.{1,}/
         - id: $$cap_aws_s3_endpoint_url
           label: AWS S3 Endpoint URL
-          defaultValue: ' '
+          defaultValue: ''
           description: Enter the AWS S3 endpoint URL, leave blank for no storage configuration.
-          validRegex: /.{1,}/
+          validRegex: /.{0,}/
         - id: $$cap_aws_access_key_id
           label: AWS Access Key ID
-          defaultValue: ' '
+          defaultValue: ''
           description: Enter the AWS access key ID, leave blank for no storage configuration.
-          validRegex: /.{1,}/
+          validRegex: /.{0,}/
         - id: $$cap_aws_secret_access_key
           label: AWS Secret Access Key
-          defaultValue: ' '
+          defaultValue: ''
           description: Enter the AWS secret access key, leave blank for no storage configuration.
-          validRegex: /.{1,}/
+          validRegex: /.{0,}/
         - id: $$cap_aws_storage_bucket_name
           label: AWS Storage Bucket Name
-          defaultValue: ' '
+          defaultValue: ''
           description: Enter the AWS storage bucket name, leave blank for no storage configuration.
-          validRegex: /.{1,}/
+          validRegex: /.{0,}/
         - id: $$cap_aws_region
           label: AWS Region
-          defaultValue: ' '
+          defaultValue: ''
           description: Enter the AWS region, leave blank for the likes of Cloudflare R2.
-          validRegex: /.{1,}/
+          validRegex: /.{0,}/
 
     instructions:
         start: |-
@@ -88,7 +83,7 @@ caproverOneClickApp:
             Please wait a minute to populate the database. Please enable HTTPS for this to work properly.
             Your service is available at http://$$cap_appname.$$cap_root_domain
 
-    displayName: Chief Onboarding
-    isOfficial: false
+    displayName: Chief Onboarding (No Database)
+    isOfficial: true
     description: A seamless onboarding experience for your employees.
     documentation: Visit https://github.com/chiefonboarding/chiefonboarding for more details.

@@ -1,0 +1,72 @@
+captainVersion: 4
+services:
+    # HealthChecks
+    $$cap_appname:
+        image: healthchecks/healthchecks:$$cap_hc_version
+        restart: always
+        environment:
+            DB: $$cap_db_engine
+            DB_HOST: $$cap_db_host
+            DB_NAME: $$cap_db_name
+            DB_PASSWORD: $$cap_db_password
+            DB_PORT: $$cap_db_port
+            DB_SSLMODE: prefer
+            DB_TARGET_SESSION_ATTRS: read-write
+            DB_USER: $$cap_db_user
+            DEBUG: False
+            SECRET_KEY: $$cap_gen_random_hex(64)
+            SITE_ROOT: http://0.0.0.0:8000
+        caproverExtra:
+            containerHttpPort: '8000'
+
+caproverOneClickApp:
+    variables:
+        - id: $$cap_hc_version
+          label: HealthChecks Manifest Digest
+          defaultValue: 'v2.8.1'
+          description: Find on https://hub.docker.com/r/healthchecks/healthchecks/tags
+        - id: $$cap_db_engine
+          label: Database Engine
+          defaultValue: 'postgres'
+          description: 'Select the database engine to use. Possible values: sqlite, postgres, mysql.'
+          validRegex: /^(sqlite|postgres|mysql)$/
+        - id: $$cap_db_password
+          label: Database user password
+          description: Password must be at least 12 characters. Please use a random string.
+          defaultValue: 'password'
+          validRegex: /^[^\@]{12,}$/
+        - id: $$cap_db_host
+          label: Database Host
+          defaultValue: 'db'
+          description: Enter the host for the database.
+          validRegex: /.{1,}/
+        - id: $$cap_db_name
+          label: Database Name
+          defaultValue: 'healthchecks'
+          description: Enter the name of the database.
+          validRegex: /.{1,}/
+        - id: $$cap_db_user
+          label: Database User
+          defaultValue: 'healthchecks'
+          description: Enter the username for the database connection.
+          validRegex: /.{1,}/
+        - id: $$cap_db_port
+          label: Database Port
+          defaultValue: '5432'
+          description: The port on which the database is listening, defaults are 5432 for postgres and 3306 for mysql.
+          validRegex: /^[0-9]+$/
+
+    instructions:
+        start: |-
+            Healthchecks is a cron job monitoring service. It listens for HTTP requests and email messages ("pings") from your cron jobs and scheduled tasks ("checks"). When a ping does not arrive on time, Healthchecks sends out alerts.
+            Github: https://github.com/healthchecks/healthchecks
+
+        end: |-
+            Aaaand you're done! 😄
+            Your service is available at http://$$cap_appname.$$cap_root_domain
+            More environment variables can be found at https://github.com/healthchecks/healthchecks/blob/master/docker/.env
+
+    displayName: 'HealthChecks (No Database)'
+    isOfficial: true
+    description: Healthchecks is a cron job monitoring service.
+    documentation: https://github.com/healthchecks/healthchecks
