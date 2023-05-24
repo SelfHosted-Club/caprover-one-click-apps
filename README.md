@@ -4,7 +4,7 @@
 In order to add a third party repository:
 -   Login to your CapRover dashboard
 -   Go to **apps** and click on **One-Click Apps/Databases** and scrolldown to the bottom
--   Under **3rd party repositories:** copy  the URL, (for example: `[https://caprover.selfhosted.club]`) and paste it in to the text box
+-   Under **3rd party repositories:** copy  the URL, `https://caprover.selfhosted.club` and paste it in to the text box
 -   Click the **_Connect New Repository_** button
 
 ---------
