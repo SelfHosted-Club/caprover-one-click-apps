@@ -13,6 +13,7 @@ services:
             AWS_STORAGE_BUCKET_NAME: $$cap_aws_storage_bucket_name
             AWS_REGION: $$cap_aws_region
             VIRTUAL_HOST: $$cap_appname.$$cap_root_domain
+            CSRF_TRUSTED_ORIGINS: $$cap_appname.$$cap_root_domain
         caproverExtra:
             containerHttpPort: '8000'
 

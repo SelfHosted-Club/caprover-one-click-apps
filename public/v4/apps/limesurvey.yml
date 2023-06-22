@@ -1,0 +1,81 @@
+captainVersion: 4
+services:
+    $$cap_appname:
+        documentation: Taken from https://registry.hub.docker.com/r/martialblog/limesurvey
+        image: martialblog/limesurvey:$$cap_limesurvey_version
+        environment: -DB_TYPE=$$cap_limesurvey_db_type
+            -DB_HOST=$$cap_db_host
+            -DB_PORT=$$cap_db_port
+            -DB_NAME=$$cap_db_name
+            -DB_USER=$$cap_db_user
+            -DB_PASSWORD=$$cap_db_password
+            -BASE_URL=http://$$cap_appname.$$cap_root_domain
+            -ENCRYPT_SECRET_BOX_KEY=$$cap_secret_key
+            -ADMIN_PASSWORD=
+        volumes:
+            - $$cap_appname-data:/app/upload
+        caproverExtra:
+            containerHttpPort: '8080'
+        restart: always
+caproverOneClickApp:
+    variables:
+        - id: $$cap_limesurvey_db_type
+          label: Database Type
+          defaultValue: 'mysql'
+          validRegex:
+          description: Type for database in use mysql or pgsql
+        - id: $$cap_limesurvey_version
+          label: Limesurvey Version
+          defaultValue: '6.0.7-230515-apache'
+          description: https://registry.hub.docker.com/r/martialblog/limesurvey/tags
+          validRegex: /^([^\s^\/])+$/
+        - id: $$cap_db_host
+          label: DB hostname
+          defaultValue: mydb
+          description: Enter the database hostname
+          validRegex: /^([^\s^\/])+$/
+        - id: $$cap_db_port
+          label: DB port
+          defaultValue: 3306
+          description: Enter the database port
+        - id: $$cap_db_name
+          label: database name
+          defaultValue: limesurvey
+          description: name for the database.
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_db_user
+          label: database user
+          defaultValue: limesurvey
+          description: Username for the database using mysql.
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_db_password
+          label: database password
+          defaultValue: limesurvey
+          description: Username for the database using mysql.
+          validRegex: /^([a-zA-Z0-9])+$/
+        - id: $$cap_secret_key
+          label: Secret key for database encryption
+          defaultValue: $$cap_gen_random_hex(64)
+          description: encryption key for Database records, leave blank for none
+          validRegex: /.{0,}/
+    instructions:
+        start: >-
+            Limesurvey is an open source online survey tool.
+
+            The process will deploy a database and the App.
+
+            The process will take about a minute for the process to finish.
+        end: >-
+            Limesurvey is deployed and available as $$cap_appname.
+
+
+            Please use srv-captain--$$cap_appname-db as database host on your online configuration.
+
+            $$cap_db_user as user name
+
+            $$cap_db_password as password
+
+            $$cap_db_name as database name
+    displayName: 'Limesurvey (No DB)'
+    isOfficial: false
+    description: 'Limesurvey is an open source online survey tool.'
