@@ -66,6 +66,8 @@ caproverOneClickApp:
             Your service is available at http://$$cap_appname.$$cap_root_domain
             More environment variables can be found at https://github.com/healthchecks/healthchecks/blob/master/docker/.env
 
+            For more apps, add the respository https://caprover.selfhosted.club
+
     displayName: 'HealthChecks (No Database)'
     isOfficial: true
     description: Healthchecks is a cron job monitoring service.

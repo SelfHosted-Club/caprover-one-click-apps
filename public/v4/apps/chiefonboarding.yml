@@ -84,6 +84,8 @@ caproverOneClickApp:
             Please wait a minute to populate the database. Please enable HTTPS for this to work properly.
             Your service is available at http://$$cap_appname.$$cap_root_domain
 
+            For more apps, add the respository https://caprover.selfhosted.club
+
     displayName: Chief Onboarding (No Database)
     isOfficial: true
     description: A seamless onboarding experience for your employees.

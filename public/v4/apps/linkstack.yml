@@ -1,0 +1,52 @@
+captainVersion: 4
+services:
+    $$cap_appname-linkstack:
+        image: linkstackorg/linkstack:$$cap_linkstack_ver
+        restart: always
+        environment:
+            TZ: $$cap_linkstack_TZ
+            SERVER_ADMIN: $$cap_linkstack_admin_email
+            LOG_LEVEL: 'info'
+            PHP_MEMORY_LIMIT: '256M'
+            UPLOAD_MAX_FILESIZE: '8M'
+        volumes:
+            - $$cap_appname-linkstack-data:/htdocs
+        caproverExtra:
+            containerHttpPort: '80'
+
+caproverOneClickApp:
+    variables:
+        - id: $$cap_linkstack_ver
+          label: Linkstack Version
+          defaultValue: 'latest'
+          description: 'Check out their Docker page for the valid tags https://hub.docker.com/r/linkstackorg/linkstack/tags'
+          validRegex: /.+/
+
+        - id: $$cap_linkstack_TZ
+          label: Timezone
+          defaultValue: 'Europe/Berlin'
+          description: 'Enter the timezone for the server.'
+          validRegex: /.+/
+
+        - id: $$cap_linkstack_admin_email
+          label: Server Admin Email
+          defaultValue: 'admin@example.com'
+          description: 'Enter the email address of the server administrator.'
+          validRegex: /.+/
+
+    instructions:
+        start: |-
+            The LinkStack app is a web-based application for managing links and bookmarks.
+            GitHub: https://github.com/linkstackorg/LinkStack
+
+            INFO: "Linkstack" will be appended to your app name
+
+        end: |-
+            Aaaand you're done! 😄
+            Your service is available at http://$$cap_appname.$$cap_root_domain , please wait a few minutes for it to come online.
+            For more apps, add the respository https://caprover.selfhosted.club
+
+    displayName: LinkStack
+    isOfficial: true
+    description: Web-based application for managing links and bookmarks.
+    documentation: https://github.com/linkstackorg/LinkStack

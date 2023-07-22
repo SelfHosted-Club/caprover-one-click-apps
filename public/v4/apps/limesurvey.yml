@@ -76,6 +76,8 @@ caproverOneClickApp:
             $$cap_db_password as password
 
             $$cap_db_name as database name
+
+            For more apps, add the respository https://caprover.selfhosted.club
     displayName: 'Limesurvey (No DB)'
     isOfficial: false
     description: 'Limesurvey is an open source online survey tool.'
